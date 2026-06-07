@@ -19,7 +19,7 @@
 
 | Папка | Що всередині | Статус |
 |-------|--------------|--------|
-| [`research/`](./research/) | Користувачі, болі, конкуренти, патерни. [`research.md`](./research/research.md), [`competitors.md`](./research/competitors.md) + [`screens/`](./research/screens/) (референси). | 🔬 у роботі |
+| [`research/`](./research/) | Користувачі, болі, конкуренти, патерни. [`research.md`](./research/research.md), [`competitors.md`](./research/competitors.md), [`user-pains.md`](./research/user-pains.md) + [`screens/`](./research/screens/). | 🔬 у роботі |
 | [`wireframes/`](./wireframes/) | Низькодеталізовані каркаси екранів і потоків MVP. | 🌱 каркас |
 | [`concept/`](./concept/) | Високодеталізовані екрани у фінальному візуалі. | ⏳ далі |
 | [`tokens/`](./tokens/) | Колір, типографіка, відступи, радіуси — джерело правди візуалу. | ⏳ далі |
