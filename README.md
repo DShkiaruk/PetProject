@@ -31,9 +31,10 @@
 
 - [`CLAUDE.md`](./CLAUDE.md) — повний бриф і джерело правди про продукт, межі й
   технічні рішення. **Читати першим.**
-- [`index.html`](./index.html) — статичний placeholder, що публікується на
-  GitHub Pages через [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml).
-  Згодом сюди можна публікувати design-system / handoff.
+- [`index.html`](./index.html) — **односторінкове зведення дослідження** (для
+  перегляду людиною / портфоліо), що публікується як головна сторінка GitHub
+  Pages через [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml).
+  Контент синхронізовано з `research/`.
 
 ---
 
