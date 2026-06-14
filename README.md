@@ -19,7 +19,7 @@
 
 | Папка | Що всередині | Статус |
 |-------|--------------|--------|
-| [`research/`](./research/) | **[`research.md`](./research/research.md) — синтез-хаб** (наскрізні висновки + рішення + гіпотези). Деталі: [`jtbd.md`](./research/jtbd.md), [`competitors.md`](./research/competitors.md), [`user-pains.md`](./research/user-pains.md), [`ux-patterns.md`](./research/ux-patterns.md), [`benchmark.md`](./research/benchmark.md), [`patterns-information-architecture.md`](./research/patterns-information-architecture.md) + [`screens/`](./research/screens/). | ✅ синтез |
+| [`research/`](./research/) | **[`research.md`](./research/research.md) — синтез-хаб** (наскрізні висновки + рішення + гіпотези). Деталі: [`jtbd.md`](./research/jtbd.md), [`personas.md`](./research/personas.md), [`competitors.md`](./research/competitors.md), [`user-pains.md`](./research/user-pains.md), [`ux-patterns.md`](./research/ux-patterns.md), [`benchmark.md`](./research/benchmark.md), [`patterns-information-architecture.md`](./research/patterns-information-architecture.md) + [`screens/`](./research/screens/). | ✅ синтез |
 | [`wireframes/`](./wireframes/) | Низькодеталізовані каркаси екранів і потоків MVP. | 🌱 каркас |
 | [`concept/`](./concept/) | Високодеталізовані екрани у фінальному візуалі. | ⏳ далі |
 | [`tokens/`](./tokens/) | Колір, типографіка, відступи, радіуси — джерело правди візуалу. | ⏳ далі |
