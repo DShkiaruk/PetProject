@@ -117,6 +117,7 @@
   .b-interp{color:var(--purple); border-color:var(--purple); background:rgba(188,140,255,.10)}
   .b-q{color:var(--mut); border-color:var(--mut); background:rgba(154,164,178,.10)}
   .b-rish{color:var(--acc); border-color:var(--acc); background:rgba(88,166,255,.10)}
+  .b-hyp{color:var(--amber); border-color:var(--amber); background:rgba(210,153,34,.10)}
   .v{display:inline-block; font-size:.72rem; font-weight:800; padding:2px 9px; border-radius:6px}
   .v-take{color:#0d1117; background:var(--green)}
   .v-adapt{color:#0d1117; background:var(--amber)}
@@ -180,6 +181,8 @@
     <a class="sb-page" data-page="jtbd" href="#jtbd"><span class="ic" aria-hidden="true">🧭</span> JTBD</a>
     <div class="sb-sub" data-sub="jtbd" hidden>
       <a href="#jtbd-core">Стрижневий job</a>
+      <a href="#jtbd-hierarchy">Ієрархія jobs</a>
+      <a href="#jtbd-matrix">Матриця пріоритизації</a>
       <a href="#jtbd-need-feature">Потреба → фіча</a>
       <a href="#jtbd-scenarios">10 сценаріїв</a>
     </div>
@@ -210,6 +213,7 @@
       <span><span class="b b-fakt">факт</span> підтверджено джерелом</span>
       <span><span class="b b-interp">інтерпретація</span> висновок</span>
       <span><span class="b b-rish">рішення</span> продуктове рішення</span>
+      <span><span class="b b-hyp">гіпотеза</span> без валідації</span>
       <span><span class="b b-q">?</span> невідомо / не діставали</span>
       <span><span class="v v-take">БЕРЕМО</span> <span class="v v-adapt">АДАПТУЄМО</span> <span class="v v-avoid">УНИКАЄМО</span></span>
     </div>
@@ -319,7 +323,7 @@
   </div>
 </div></section>
 
-<!-- 3. JTBD -->
+<!-- JTBD (page) -->
 <section id="jtbd" data-page="jtbd"><div class="wrap">
   <h2>Користувачі та JTBD</h2>
   <p class="sub">Джерело: <code>jtbd.md</code></p>
@@ -328,6 +332,69 @@
     <h4>Стрижневий job</h4>
     <p><b>Коли</b> хтось у родині має справу з лікарем/ліками/аналізами, <b>я хочу</b> мати всю медичну інформацію родини в одному приватному місці й діставати потрібне за секунди, <b>щоб</b> не залежати від пам'яті та паперів і впевнено показати лікарю повну картину.</p>
     <p class="ctx"><b>Ролі-актори:</b> <span class="pill">Координатор (self-база + 2–4 профілі рідних)</span> <span class="pill">Співкоординатор (поза MVP)</span> <span class="pill">Носій картки</span> — детально в секції <a href="#personas">Персони</a>.</p>
+  </div>
+
+  <h3 id="jtbd-hierarchy">Ієрархія jobs</h3>
+  <p class="ctx">Структурує 10 сценаріїв у дерево робіт + emotional/social шар. Правило: якщо в «я хочу» опинилась назва функції — це фіча, не job.</p>
+
+  <div class="card">
+    <h4>MAIN job (стрижневий) <span class="b b-fakt">факт</span></h4>
+    <p><b>Коли</b> хтось у родині має справу з лікарем / ліками / аналізами, <b>я хочу</b> мати всю медичну картину родини під рукою й діставати потрібне за секунди, <b>щоб</b> не залежати від пам'яті та паперів і впевнено показати лікарю повну картину. → усе нижче — кроки до цього.</p>
+  </div>
+
+  <h4>RELATED jobs (функціональні кроки) <span class="b b-fakt">факт</span></h4>
+  <ol>
+    <li><b>Зафіксувати вхідне, поки не загубив</b> — <b>коли</b> в руки потрапляє виписка/результат, <b>я хочу</b> швидко й надійно покласти його на місце, <b>щоб</b> потім не шукати по галереї та месенджерах. <span class="ctx">(сц.4)</span></li>
+    <li><b>Показати повну картину іншому за секунди</b> — перед новим лікарем або родичу, без переказу з пам'яті, щоб не витрачати на це прийом. <span class="ctx">(сц.2, 3, 8)</span></li>
+    <li><b>Тримати ліки під контролем у часі й між людьми</b> — знати, що вже зроблено й що попереду, щоб не дати двічі / не пропустити / не лишитись без препарату. <span class="ctx">(сц.1, 8, 9)</span></li>
+    <li><b>Розуміти зміну й не пропускати планове</b> — бачити динаміку й вчасно згадати, щоб реагувати на тенденцію, а не на окрему цифру, і не випасти на рік. <span class="ctx">(сц.5, 7, 9)</span></li>
+    <li><b>Бути готовим до критичного моменту, навіть якщо мене нема поряд</b> — найважливіше про рідного доступне будь-кому миттєво. <span class="ctx">(сц.6, 2)</span></li>
+  </ol>
+  <p class="ctx">Наскрізний enabler (не окремий job): «не сплутати, чий це запис» (сц.10) — умова надійності RELATED-jobs 1–3.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>EMOTIONAL jobs <span class="b b-hyp">гіпотеза</span></h4>
+      <ul>
+        <li><b>Коли</b> я відповідаю за здоров'я рідних, <b>я хочу</b> почуватися підготовленим і спокійним, а не безпорадним, <b>щоб</b> менше тривожитись, що щось забуду саме тоді, коли це важить.</li>
+        <li><b>Коли</b> я веду найчутливіші дані рідних, <b>я хочу</b> почуватися впевнено, що вони приватні й під контролем, <b>щоб</b> наважитись довірити їх продукту.</li>
+      </ul>
+      <p class="ctx">Дименсія документована (personas O1/O9/O12); конкретні jobs без живих інтерв'ю (G1).</p>
+    </div>
+    <div class="card">
+      <h4>SOCIAL job <span class="b b-hyp">гіпотеза</span></h4>
+      <ul>
+        <li><b>Коли</b> я перед лікарем або ріднею, <b>я хочу</b> виглядати відповідальним опікуном, що тримає все під контролем, <b>щоб</b> мені довіряли догляд за рідними.</li>
+      </ul>
+      <p class="ctx">Із соц. боку стрижневого job + personas O1; без живої валідації (G1).</p>
+    </div>
+  </div>
+
+  <h3 id="jtbd-matrix">Матриця пріоритизації jobs</h3>
+  <p class="ctx">Не плутати з «потреба → фіча» нижче — ця про <b>важливість jobs</b>. Клітинка: важливість 1–3 + сценарій; <span class="b b-q">?</span> = не знаю. РИНОК: автозбір = нам недосяжно.</p>
+  <div class="tw"><table>
+    <tr><th>Job</th><th class="c">Коорд. / self</th><th class="c">Коорд. / догляд</th><th class="c">Носій (крит.)</th><th>Фіча</th><th>Ринок</th></tr>
+    <tr><td><b>MAIN</b> — картина під рукою + показати</td><td class="c">3</td><td class="c">3</td><td class="c">1</td><td>1 Профілі + 6 PDF</td><td>лише <b>автозбором</b> (PicnicHealth-AI / MyChart-EHR / Helsi-ЕСОЗ) — нам недосяжно → <b>отвір</b></td></tr>
+    <tr><td><b>R1</b> — зафіксувати вхідне</td><td class="c">3</td><td class="c">3</td><td class="c">1</td><td>2 Документи</td><td>ринок уникає ручного вводу → <b>ризик №1 + отвір</b></td></tr>
+    <tr><td><b>R2</b> — показати картину за секунди</td><td class="c">3</td><td class="c">3</td><td class="c">2</td><td>6 PDF-анамнез</td><td>PicnicHealth (AI) / MyChart (онлайн, EHR) / Apple (жива, орг); <b>офлайн PDF = отвір</b></td></tr>
+    <tr><td><b>R3</b> — ліки в часі / між людьми</td><td class="c">2</td><td class="c">3</td><td class="c">1</td><td>3 Ліки (+5)</td><td>Medisafe закриває сильно; Helsi — рецепти з ЕСОЗ (авто). <b>Must, не отвір</b></td></tr>
+    <tr><td><b>R4</b> — зміна + не пропустити планове</td><td class="c">3</td><td class="c">3</td><td class="c">1</td><td>4 Аналізи + 5 Нагадування</td><td>Apple / DILA / MyChart (автодані) + Medisafe / Helsi. <b>Закрито ринком</b>; нюанс — discoverability + без норм</td></tr>
+    <tr><td><b>R5</b> — готовність до критичного без мене</td><td class="c">3</td><td class="c">3</td><td class="c">3</td><td>7 Екстрений екран</td><td>Apple Medical ID (нативний lock-screen — <b>недосяжно в PWA</b>, Q8); офлайн PWA-екран — наш варіант</td></tr>
+  </table></div>
+
+  <h4>EMOTIONAL / SOCIAL jobs <span class="b b-hyp">гіпотеза</span></h4>
+  <p class="ctx">Окремо: важливість тут — здогад, не дані (G1); не змішуємо з оцінкою ядра.</p>
+  <div class="tw"><table>
+    <tr><th>Job</th><th class="c">self</th><th class="c">догляд</th><th class="c">Носій</th><th>Покриття</th></tr>
+    <tr><td>E1 — почуватися підготовленим</td><td class="c">3?</td><td class="c">3?</td><td class="c">?</td><td>усе ядро готовності; ринок прямо не адресує</td></tr>
+    <tr><td>E2 — впевненість у приватності</td><td class="c">3?</td><td class="c">3?</td><td class="c">?</td><td>приватність-архітектура; діф — без AI / без продажу даних</td></tr>
+    <tr><td>S1 — виглядати надійним опікуном</td><td class="c">1?</td><td class="c">3?</td><td class="c">?</td><td>6 PDF + повна картина; непрямо — Mayo</td></tr>
+  </table></div>
+
+  <div class="card" style="border-color:var(--green)">
+    <h4>Висновок: ядро MVP</h4>
+    <p><b>Ядро (диференціювальне) = 3 jobs</b>, важливі для Координатора <b>і</b> не закриті ринком (або лише недосяжним автозбором): <b>R1 → Документи (2)</b>, <b>R2 → PDF-анамнез (6)</b>, <b>R5 → Екстрений екран (7)</b>. MAIN — парасоля над ними. <b>R3 / R4 — table-stakes</b>: ринок їх закриває (Medisafe / Apple / лаби) — наздоганяємо, не диференціюємось.</p>
+    <p class="ctx"><b>Orphan-фіч немає</b> — усі 7 мапляться на ≥1 job. Найслабше заякорені: 5 Нагадування, 1 Профілі — сигнал «перевірити job, перш ніж різати», не виліт.</p>
   </div>
 
   <h3 id="jtbd-need-feature">Потреба → сценарії → фіча</h3>
@@ -399,7 +466,7 @@
   </details>
 </div></section>
 
-<!-- 4. PERSONAS -->
+<!-- PERSONAS (page) -->
 <section id="personas" data-page="personas"><div class="wrap">
   <h2>Персони</h2>
   <p class="sub">Джерело: <code>personas.md</code> — ролі + ситуації, не персони з іменами</p>
@@ -460,7 +527,7 @@
   </div>
 </div></section>
 
-<!-- 5. PAINS -->
+<!-- 3. PAINS -->
 <section id="pains" data-page="research"><div class="wrap">
   <h2>3 · Болі користувачів</h2>
   <p class="sub">Джерело: <code>user-pains.md</code> — реальні відгуки як проксі замість інтерв'ю</p>
@@ -514,7 +581,7 @@
   </ul>
 </div></section>
 
-<!-- 6. COMPETITORS -->
+<!-- 4. COMPETITORS -->
 <section id="competitors" data-page="research"><div class="wrap">
   <h2>4 · Конкуренти</h2>
   <p class="sub">Джерело: <code>competitors.md</code> — 3 групи (хард / софт / аспіраційні)</p>
@@ -565,7 +632,7 @@
   </div>
 </div></section>
 
-<!-- 7. UX PATTERNS -->
+<!-- 5. UX PATTERNS -->
 <section id="patterns" data-page="research"><div class="wrap">
   <h2>5 · UX-патерни</h2>
   <p class="sub">Джерело: <code>ux-patterns.md</code> — «як саме» працює взаємодія + вердикт</p>
@@ -610,7 +677,7 @@
   </div>
 </div></section>
 
-<!-- 8. BENCHMARK -->
+<!-- 6. BENCHMARK -->
 <section id="benchmark" data-page="research"><div class="wrap">
   <h2>6 · Бенчмарк</h2>
   <p class="sub">Джерело: <code>benchmark.md</code> — найсильніші приклади з різних категорій. Шкала 1–5.</p>
@@ -667,7 +734,7 @@
   </div>
 </div></section>
 
-<!-- 9. IA -->
+<!-- 7. IA -->
 <section id="ia" data-page="research"><div class="wrap">
   <h2>7 · Інформаційна архітектура</h2>
   <p class="sub">Джерело: <code>patterns-information-architecture.md</code> — 5 осей організації</p>
@@ -693,7 +760,7 @@
   </div>
 </div></section>
 
-<!-- 10. CONCLUSIONS -->
+<!-- 8. CONCLUSIONS -->
 <section id="conclusions" data-page="research"><div class="wrap">
   <h2>8 · Висновки та відкриті питання</h2>
   <p class="sub">Джерело: <code>research.md</code> (синтез-хаб)</p>
