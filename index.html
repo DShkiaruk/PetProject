@@ -9,6 +9,7 @@
     --bg:#0d1117; --bg2:#161b22; --bg3:#1c2129; --line:#30363d;
     --tx:#e6edf3; --mut:#9aa4b2; --acc:#58a6ff;
     --green:#3fb950; --amber:#d29922; --red:#f85149; --purple:#bc8cff; --teal:#39c5cf;
+    --sbw:268px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -22,20 +23,81 @@
   header.hero h1{font-size:2.4rem; margin:0 0 .3rem}
   header.hero p{color:var(--mut); margin:.2rem 0; max-width:70ch}
   .lede{color:var(--acc)}
-  /* sticky nav */
-  nav.toc{
-    position:sticky; top:0; z-index:50; background:rgba(13,17,23,.92);
-    backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
-    overflow-x:auto; white-space:nowrap; padding:10px 0;
+
+  /* ===== app shell: left sidebar + content ===== */
+  .content{margin-left:var(--sbw)}
+  aside.sidebar{
+    position:fixed; top:0; left:0; bottom:0; width:var(--sbw); z-index:60;
+    background:var(--bg2); border-right:1px solid var(--line);
+    display:flex; flex-direction:column; overflow-y:auto;
   }
-  nav.toc .wrap{display:flex; gap:6px}
-  nav.toc a{
-    color:var(--mut); text-decoration:none; font-size:.85rem; font-weight:500;
-    padding:6px 11px; border-radius:999px; border:1px solid transparent; flex:0 0 auto;
+  .sb-brand{
+    display:flex; align-items:center; gap:10px; padding:18px 18px 14px;
+    border-bottom:1px solid var(--line); position:sticky; top:0;
+    background:var(--bg2); z-index:1;
   }
-  nav.toc a:hover{color:var(--tx); background:var(--bg2); border-color:var(--line)}
+  .sb-brand .logo{
+    width:30px; height:30px; border-radius:8px; flex:0 0 auto;
+    background:linear-gradient(135deg,var(--acc),var(--purple));
+    display:grid; place-items:center; font-weight:800; color:#0d1117; font-size:1rem;
+  }
+  .sb-brand b{font-size:1.05rem; letter-spacing:.01em}
+  .sb-brand span{display:block; font-size:.72rem; color:var(--mut); font-weight:500}
+  .sb-nav{padding:14px 12px 24px; flex:1}
+  .sb-label{
+    font-size:.7rem; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--mut); font-weight:700; padding:14px 10px 6px;
+  }
+  .sb-page{
+    display:flex; align-items:center; gap:9px; text-decoration:none;
+    color:var(--tx); font-size:.92rem; font-weight:600;
+    padding:9px 10px; border-radius:8px; border:1px solid transparent;
+  }
+  .sb-page:hover{background:var(--bg3)}
+  .sb-page.active{background:var(--bg3); border-color:var(--line); color:var(--acc)}
+  .sb-page.soon{color:var(--mut); font-weight:500; cursor:default}
+  .sb-page.soon:hover{background:transparent}
+  .sb-page .ic{width:16px; text-align:center; flex:0 0 auto; opacity:.85}
+  .sb-page .tag{margin-left:auto; font-size:.62rem; font-weight:700; color:var(--mut);
+    border:1px solid var(--line); border-radius:999px; padding:1px 7px; text-transform:uppercase}
+  /* nested section links under active page */
+  .sb-sub{margin:2px 0 4px 14px; padding-left:11px; border-left:1px solid var(--line)}
+  .sb-sub a{
+    display:block; text-decoration:none; color:var(--mut);
+    font-size:.84rem; padding:5px 10px; border-radius:7px;
+  }
+  .sb-sub a:hover{color:var(--tx); background:var(--bg3)}
+  .sb-sub a.active{color:var(--acc); background:var(--bg3)}
+  .sb-sub a .n{color:var(--mut); font-variant-numeric:tabular-nums; margin-right:7px; font-size:.78rem}
+  /* mobile toggle */
+  .navtoggle{
+    display:none; position:fixed; top:12px; left:12px; z-index:70;
+    width:42px; height:42px; border-radius:10px; cursor:pointer;
+    background:var(--bg2); border:1px solid var(--line); color:var(--tx);
+    font-size:1.2rem; line-height:1;
+  }
+  .sb-backdrop{display:none}
+  @media(max-width:860px){
+    .content{margin-left:0}
+    .navtoggle{display:block}
+    aside.sidebar{transform:translateX(-100%); transition:transform .22s cubic-bezier(.22,1,.36,1); box-shadow:0 0 40px rgba(0,0,0,.5)}
+    body.nav-open aside.sidebar{transform:translateX(0)}
+    body.nav-open .sb-backdrop{display:block; position:fixed; inset:0; z-index:55; background:rgba(0,0,0,.5)}
+    header.hero{padding-top:64px}
+    /* comfortable touch targets in the drawer */
+    .sb-sub a{min-height:44px; display:flex; align-items:center}
+  }
+  /* visible keyboard focus (browser default is too dim on dark) */
+  a:focus-visible, .navtoggle:focus-visible, summary:focus-visible{
+    outline:2px solid var(--acc); outline-offset:2px; border-radius:6px;
+  }
+  .sb-page:focus-visible, .sb-sub a:focus-visible{outline:2px solid var(--acc); outline-offset:-2px}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    aside.sidebar{transition:none}
+  }
   section{padding:38px 0; border-bottom:1px solid var(--line)}
-  section h2{font-size:1.5rem; margin:0 0 .2rem; scroll-margin-top:70px}
+  section h2{font-size:1.5rem; margin:0 0 .2rem; scroll-margin-top:24px}
   .sub{color:var(--mut); margin:.1rem 0 1.3rem; font-size:.95rem}
   h3{font-size:1.08rem; margin:1.6rem 0 .6rem; color:#cdd6e0}
   h4{font-size:.98rem; margin:1.1rem 0 .4rem}
@@ -90,7 +152,40 @@
 </head>
 <body>
 
-<header class="hero">
+<button class="navtoggle" aria-label="Відкрити меню" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div class="sb-backdrop"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sb-brand">
+    <div class="logo">K</div>
+    <div><b>Kartka</b><span>Документація продукту</span></div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-label">Сторінки</div>
+
+    <a class="sb-page active" href="#top" aria-current="page"><span class="ic" aria-hidden="true">📑</span> Дослідження</a>
+    <div class="sb-sub">
+      <a href="#product"><span class="n">1</span>Продукт</a>
+      <a href="#jtbd"><span class="n">2</span>JTBD</a>
+      <a href="#pains"><span class="n">3</span>Болі</a>
+      <a href="#competitors"><span class="n">4</span>Конкуренти</a>
+      <a href="#patterns"><span class="n">5</span>UX-патерни</a>
+      <a href="#benchmark"><span class="n">6</span>Бенчмарк</a>
+      <a href="#ia"><span class="n">7</span>ІА</a>
+      <a href="#conclusions"><span class="n">8</span>Висновки</a>
+    </div>
+
+    <div class="sb-label">Скоро</div>
+    <span class="sb-page soon"><span class="ic">🎨</span> Дизайн-система <span class="tag">soon</span></span>
+    <span class="sb-page soon"><span class="ic">🧩</span> Компоненти <span class="tag">soon</span></span>
+    <span class="sb-page soon"><span class="ic">🖼️</span> Вайрфрейми <span class="tag">soon</span></span>
+    <span class="sb-page soon"><span class="ic">🚀</span> Хендофф <span class="tag">soon</span></span>
+  </nav>
+</aside>
+
+<main class="content">
+
+<header class="hero" id="top">
   <div class="wrap">
     <h1>Kartka — Research</h1>
     <p class="lede">Приватний сімейний медичний щоденник для українських сімей. AI не використовується.</p>
@@ -103,19 +198,6 @@
     </div>
   </div>
 </header>
-
-<nav class="toc">
-  <div class="wrap">
-    <a href="#product">1 · Продукт</a>
-    <a href="#jtbd">2 · JTBD</a>
-    <a href="#pains">3 · Болі</a>
-    <a href="#competitors">4 · Конкуренти</a>
-    <a href="#patterns">5 · UX-патерни</a>
-    <a href="#benchmark">6 · Бенчмарк</a>
-    <a href="#ia">7 · ІА</a>
-    <a href="#conclusions">8 · Висновки</a>
-  </div>
-</nav>
 
 <!-- 1. PRODUCT -->
 <section id="product"><div class="wrap">
@@ -167,16 +249,16 @@
 
   <h3>Потреба → сценарії → фіча</h3>
   <div class="tw"><table>
-    <tr><th>Потреба зі сценаріїв</th><th class="c">№ сценаріїв</th><th class="c">Фіча MVP</th></tr>
-    <tr><td>Швидкий фото-вхід документа</td><td class="c">4</td><td class="c">2</td></tr>
-    <tr><td>PDF/шер анамнезу (повний і частковий)</td><td class="c">2,3,8</td><td class="c">6</td></tr>
-    <tr><td>Офлайн-доступ до критичного</td><td class="c">2,6</td><td class="c">6,7</td></tr>
-    <tr><td>Екстрений екран без повного входу</td><td class="c">6</td><td class="c">7</td></tr>
-    <tr><td>Динаміка показника без норм</td><td class="c">7</td><td class="c">4</td></tr>
-    <tr><td>Ліки: статус сьогодні + undo + конфлікти</td><td class="c">1,8</td><td class="c">3</td></tr>
-    <tr><td>Період/курс ліків + поповнення</td><td class="c">9</td><td class="c">3,5</td></tr>
-    <tr><td>Повторювані нагадування + фолбек</td><td class="c">5</td><td class="c">5</td></tr>
-    <tr><td>Надійний перемикач профілю</td><td class="c">10</td><td class="c">1</td></tr>
+    <tr><th>Потреба зі сценаріїв</th><th class="c">№ сценаріїв</th><th>Фіча MVP</th></tr>
+    <tr><td>Швидкий фото-вхід документа</td><td class="c">4</td><td>Документи (2)</td></tr>
+    <tr><td>PDF/шер анамнезу (повний і частковий)</td><td class="c">2,3,8</td><td>PDF-анамнез (6)</td></tr>
+    <tr><td>Офлайн-доступ до критичного</td><td class="c">2,6</td><td>PDF-анамнез (6) · Екстрений екран (7)</td></tr>
+    <tr><td>Екстрений екран без повного входу</td><td class="c">6</td><td>Екстрений екран (7)</td></tr>
+    <tr><td>Динаміка показника без норм</td><td class="c">7</td><td>Трекінг аналізів (4)</td></tr>
+    <tr><td>Ліки: статус сьогодні + undo + конфлікти</td><td class="c">1,8</td><td>Трекінг ліків (3)</td></tr>
+    <tr><td>Період/курс ліків + поповнення</td><td class="c">9</td><td>Трекінг ліків (3) · Нагадування (5)</td></tr>
+    <tr><td>Повторювані нагадування + фолбек</td><td class="c">5</td><td>Нагадування (5)</td></tr>
+    <tr><td>Надійний перемикач профілю</td><td class="c">10</td><td>Профілі (1)</td></tr>
   </table></div>
 
   <h3>10 сценаріїв → вимоги до екранів</h3>
@@ -185,52 +267,52 @@
   <details><summary><span class="num">1</span>Координую ліки літнього батька між собою й сестрою</summary>
     <p class="ctx">Батько приймає 6+ препаратів; я і сестра поперемінно даємо ліки. Ризик подвійної дози, домовляємось у месенджері.</p>
     <ul><li>Екран «ліки профілю» зі статусом на сьогодні: прийнято / пропущено / попереду.</li><li>Позначка прийому з <b>миттєвим undo</b>.</li><li>Видимість «хто/коли позначив» (журнал прийому).</li><li>Список усіх активних ліків члена в одному місці.</li></ul>
-    <p class="ctx">Фічі: 3, 1.</p>
+    <p class="ctx">Фічі: Трекінг ліків (3) · Профілі (1).</p>
   </details>
   <details><summary><span class="num">2</span>Дитина захворіла в подорожі, незнайомий лікар просить історію</summary>
     <p class="ctx">Інше місто/країна, лікар не має доступу до картки; можливо без інтернету.</p>
     <ul><li>Кнопка <b>«Показати лікарю / PDF-анамнез»</b> — 1–2 тапи.</li><li>Анамнез доступний <b>офлайн</b>.</li><li>Вибір обсягу: повний vs лише критичне.</li><li>Мова документа перемикається (укр/англ).</li></ul>
-    <p class="ctx">Фічі: 6, 7, 1.</p>
+    <p class="ctx">Фічі: PDF-анамнез (6) · Екстрений екран (7) · Профілі (1).</p>
   </details>
   <details><summary><span class="num">3</span>Перший візит до нового вузького спеціаліста</summary>
     <p class="ctx">Направлення до кардіолога, який нічого про нас не знає; збираю папери вручну.</p>
     <ul><li>PDF одного члена: хроніка, алергії, поточні ліки, останні аналізи, візити.</li><li>Прев'ю + вибір, що включити.</li><li>Поділитися: файл / лінк / друк.</li></ul>
-    <p class="ctx">Фічі: 6, 4, 1.</p>
+    <p class="ctx">Фічі: PDF-анамнез (6) · Трекінг аналізів (4) · Профілі (1).</p>
   </details>
   <details><summary><span class="num">4</span>Прийшла виписка/результат — зберегти, поки не загубив <span class="b b-q">ризик №1</span></summary>
     <p class="ctx">На руках паперова виписка/фото; кидаю в галерею/Telegram → потім не знаходжу.</p>
     <ul><li><b>Фото-перший</b> вхід: камера/файл → автодата → тип і лікар опційні.</li><li>Дефолт профілю = останній використаний.</li><li>«Повторити останній запис» / шаблони типів.</li><li>Зберегти за ≤3 тапи.</li></ul>
-    <p class="ctx">Фіча 2. Головний ризик продукту — саме тут.</p>
+    <p class="ctx">Фіча: Документи (2). Головний ризик продукту — саме тут.</p>
   </details>
   <details><summary><span class="num">5</span>Щорічний чекап / стоматолог раз на пів року</summary>
     <p class="ctx">Планові огляди, які легко забути.</p>
     <ul><li>Візит із <b>повторюваністю</b> (рік / 6 міс / кастом).</li><li>Нагадування з керованим випередженням і тихими годинами.</li><li>Запасний канал, якщо push недоступний (email/локальне).</li></ul>
-    <p class="ctx">Фіча 5.</p>
+    <p class="ctx">Фіча: Нагадування (5).</p>
   </details>
   <details><summary><span class="num">6</span>Алергія на ліки — щоб усі знали миттєво</summary>
     <p class="ctx">У дитини анафілаксія; може знадобитись швидкій/іншому дорослому.</p>
     <ul><li><b>Екстрений екран</b>: алергії, хроніка, група крові, поточні ліки, контакти.</li><li>Доступ без повного входу (як Apple Medical ID) — PWA-обмеження дослідити.</li><li>Червоний акцент, великий шрифт.</li><li>Кнопка <b>«Лікарня/травмпункт поряд»</b> → зовнішні мапи.</li></ul>
-    <p class="ctx">Фічі: 7, 1.</p>
+    <p class="ctx">Фічі: Екстрений екран (7) · Профілі (1).</p>
   </details>
   <details><summary><span class="num">7</span>Відстежити, чи показник покращується між здачами</summary>
     <p class="ctx">У дитини був низький гемоглобін; результати в різних PDF/лабораторіях.</p>
     <ul><li>Екран показника: <b>крива в часі</b> з діапазонами.</li><li>Тап на точку → значення + дата + джерело.</li><li>Додавання: дата + значення + одиниця (+ файл) з автодоповненням.</li><li><b>Без референсних норм і оцінок.</b></li></ul>
-    <p class="ctx">Фіча 4.</p>
+    <p class="ctx">Фіча: Трекінг аналізів (4).</p>
   </details>
   <details><summary><span class="num">8</span>Бабуся в лікарні — передати родичу повний список ліків</summary>
     <p class="ctx">Госпіталізація; диктую по телефону, помилки в назвах/дозах.</p>
     <ul><li>Експорт/шер <b>лише розділу «ліки»</b>.</li><li>Чіткий PDF-список: назва, доза, схема, період.</li><li>Поділитися лінком/файлом просто, як «надіслати в чат».</li></ul>
-    <p class="ctx">Фічі: 3, 6.</p>
+    <p class="ctx">Фічі: Трекінг ліків (3) · PDF-анамнез (6).</p>
   </details>
   <details><summary><span class="num">9</span>Закінчуються ліки — що докупити / повторити рецепт</summary>
     <p class="ctx">Курс добігає кінця; помічаю, коли вже скінчилось.</p>
     <ul><li>У ліках — <b>період/курс</b> і відмітка «скоро закінчується».</li><li>«Days limit» для тимчасових курсів vs постійний прийом.</li><li>Нагадування про поповнення (опційно).</li></ul>
-    <p class="ctx">Фічі: 3, 5.</p>
+    <p class="ctx">Фічі: Трекінг ліків (3) · Нагадування (5).</p>
   </details>
   <details><summary><span class="num">10</span>Веду кілька профілів — швидко перемкнутися й не сплутати</summary>
     <p class="ctx">5 профілів; ризик додати аналіз дитини в картку батька.</p>
     <ul><li><b>Перемикач профілю через аватар у шапці</b>, завжди видимий.</li><li>Активний профіль підсвічений на КОЖНОМУ екрані вводу.</li><li>Аватари/кольори членів.</li><li>Підтвердження профілю в момент збереження.</li></ul>
-    <p class="ctx">Фіча 1, наскрізно для 2/3/4.</p>
+    <p class="ctx">Фіча: Профілі (1) — наскрізно для Документів (2) / Трекінгу ліків (3) / аналізів (4).</p>
   </details>
 </div></section>
 
@@ -387,7 +469,7 @@
 <!-- 6. BENCHMARK -->
 <section id="benchmark"><div class="wrap">
   <h2>6 · Бенчмарк</h2>
-  <p class="sub">Джерело: <code>benchmark.md</code> — best-in-class із будь-яких категорій. Шкала 1–5.</p>
+  <p class="sub">Джерело: <code>benchmark.md</code> — найсильніші приклади з різних категорій. Шкала 1–5.</p>
 
   <h3>Вимір 1 — Швидкість і безболісність ручного введення <span class="ctx">(ризик №1)</span></h3>
   <div class="tw"><table>
@@ -513,6 +595,39 @@
 <footer><div class="wrap">
   <p>Kartka — research synthesis. Джерело правди: MD-файли в <code>research/</code> (research.md · jtbd.md · user-pains.md · competitors.md · ux-patterns.md · benchmark.md · patterns-information-architecture.md). Контент цієї сторінки не виходить за межі цих файлів.</p>
 </div></footer>
+
+</main><!-- /.content -->
+
+<script>
+  // highlight the section currently in view in the sidebar
+  const subLinks = [...document.querySelectorAll('.sb-sub a')];
+  const map = Object.fromEntries(subLinks.map(a => [a.getAttribute('href').slice(1), a]));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        subLinks.forEach(a => { a.classList.remove('active'); a.removeAttribute('aria-current'); });
+        const a = map[e.target.id];
+        if (a) { a.classList.add('active'); a.setAttribute('aria-current', 'true'); }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('section[id]').forEach(s => io.observe(s));
+
+  // mobile drawer open/close, with aria-expanded kept in sync
+  const toggle = document.querySelector('.navtoggle');
+  const setNav = (open) => {
+    document.body.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+  };
+  toggle.addEventListener('click', () => setNav(!document.body.classList.contains('nav-open')));
+  document.querySelector('.sb-backdrop').addEventListener('click', () => setNav(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setNav(false); });
+  // close the drawer after picking any sidebar link
+  document.querySelector('.sidebar').addEventListener('click', e => {
+    if (e.target.closest('a')) setNav(false);
+  });
+</script>
 
 </body>
 </html>
