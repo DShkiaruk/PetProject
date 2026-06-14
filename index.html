@@ -97,6 +97,7 @@
     aside.sidebar{transition:none}
   }
   section{padding:38px 0; border-bottom:1px solid var(--line)}
+  .is-hidden{display:none !important}
   section h2{font-size:1.5rem; margin:0 0 .2rem; scroll-margin-top:24px}
   .sub{color:var(--mut); margin:.1rem 0 1.3rem; font-size:.95rem}
   h3{font-size:1.08rem; margin:1.6rem 0 .6rem; color:#cdd6e0}
@@ -164,18 +165,30 @@
   <nav class="sb-nav">
     <div class="sb-label">Сторінки</div>
 
-    <a class="sb-page active" href="#top" aria-current="page"><span class="ic" aria-hidden="true">📑</span> Дослідження</a>
-    <div class="sb-sub">
+    <a class="sb-page active" data-page="research" href="#product" aria-current="page"><span class="ic" aria-hidden="true">📑</span> Дослідження</a>
+    <div class="sb-sub" data-sub="research">
       <a href="#product"><span class="n">1</span>Продукт</a>
       <a href="#essence"><span class="n">2</span>Суть продукту</a>
-      <a href="#jtbd"><span class="n">3</span>JTBD</a>
-      <a href="#personas"><span class="n">4</span>Персони</a>
-      <a href="#pains"><span class="n">5</span>Болі</a>
-      <a href="#competitors"><span class="n">6</span>Конкуренти</a>
-      <a href="#patterns"><span class="n">7</span>UX-патерни</a>
-      <a href="#benchmark"><span class="n">8</span>Бенчмарк</a>
-      <a href="#ia"><span class="n">9</span>ІА</a>
-      <a href="#conclusions"><span class="n">10</span>Висновки</a>
+      <a href="#pains"><span class="n">3</span>Болі</a>
+      <a href="#competitors"><span class="n">4</span>Конкуренти</a>
+      <a href="#patterns"><span class="n">5</span>UX-патерни</a>
+      <a href="#benchmark"><span class="n">6</span>Бенчмарк</a>
+      <a href="#ia"><span class="n">7</span>ІА</a>
+      <a href="#conclusions"><span class="n">8</span>Висновки</a>
+    </div>
+
+    <a class="sb-page" data-page="jtbd" href="#jtbd"><span class="ic" aria-hidden="true">🧭</span> JTBD</a>
+    <div class="sb-sub" data-sub="jtbd" hidden>
+      <a href="#jtbd-core">Стрижневий job</a>
+      <a href="#jtbd-need-feature">Потреба → фіча</a>
+      <a href="#jtbd-scenarios">10 сценаріїв</a>
+    </div>
+
+    <a class="sb-page" data-page="personas" href="#personas"><span class="ic" aria-hidden="true">👥</span> Персони</a>
+    <div class="sb-sub" data-sub="personas" hidden>
+      <a href="#personas-roles">Ролі-актори</a>
+      <a href="#personas-behaviour">Рухає · болить · зрив</a>
+      <a href="#personas-gaps">Прогалини</a>
     </div>
 
     <div class="sb-label">Скоро</div>
@@ -204,7 +217,7 @@
 </header>
 
 <!-- 1. PRODUCT -->
-<section id="product"><div class="wrap">
+<section id="product" data-page="research"><div class="wrap">
   <h2>1 · Продукт коротко</h2>
   <p class="sub">Джерело: <code>CLAUDE.md</code></p>
 
@@ -242,7 +255,7 @@
 </div></section>
 
 <!-- 2. ESSENCE -->
-<section id="essence"><div class="wrap">
+<section id="essence" data-page="research"><div class="wrap">
   <h2>2 · Суть продукту</h2>
   <p class="sub">Джерело: <code>research.md</code> — навіщо Kartka існує і де її межа</p>
 
@@ -307,17 +320,17 @@
 </div></section>
 
 <!-- 3. JTBD -->
-<section id="jtbd"><div class="wrap">
-  <h2>3 · Користувачі та JTBD</h2>
+<section id="jtbd" data-page="jtbd"><div class="wrap">
+  <h2>Користувачі та JTBD</h2>
   <p class="sub">Джерело: <code>jtbd.md</code></p>
 
-  <div class="card">
+  <div class="card" id="jtbd-core">
     <h4>Стрижневий job</h4>
     <p><b>Коли</b> хтось у родині має справу з лікарем/ліками/аналізами, <b>я хочу</b> мати всю медичну інформацію родини в одному приватному місці й діставати потрібне за секунди, <b>щоб</b> не залежати від пам'яті та паперів і впевнено показати лікарю повну картину.</p>
     <p class="ctx"><b>Ролі-актори:</b> <span class="pill">Координатор (self-база + 2–4 профілі рідних)</span> <span class="pill">Співкоординатор (поза MVP)</span> <span class="pill">Носій картки</span> — детально в секції <a href="#personas">Персони</a>.</p>
   </div>
 
-  <h3>Потреба → сценарії → фіча</h3>
+  <h3 id="jtbd-need-feature">Потреба → сценарії → фіча</h3>
   <div class="tw"><table>
     <tr><th>Потреба зі сценаріїв</th><th class="c">№ сценаріїв</th><th>Фіча MVP</th></tr>
     <tr><td>Швидкий фото-вхід документа</td><td class="c">4</td><td>Документи (2)</td></tr>
@@ -331,7 +344,7 @@
     <tr><td>Надійний перемикач профілю</td><td class="c">10</td><td>Профілі (1)</td></tr>
   </table></div>
 
-  <h3>10 сценаріїв → вимоги до екранів</h3>
+  <h3 id="jtbd-scenarios">10 сценаріїв → вимоги до екранів</h3>
   <p class="ctx">Формат: контекст → робота → тертя сьогодні → вимоги до екранів. Розгорніть.</p>
 
   <details><summary><span class="num">1</span>Координую ліки літнього батька між собою й сестрою</summary>
@@ -387,13 +400,13 @@
 </div></section>
 
 <!-- 4. PERSONAS -->
-<section id="personas"><div class="wrap">
-  <h2>4 · Персони</h2>
+<section id="personas" data-page="personas"><div class="wrap">
+  <h2>Персони</h2>
   <p class="sub">Джерело: <code>personas.md</code> — ролі + ситуації, не персони з іменами</p>
 
   <div class="plaque"><b>Чесно:</b> живих інтерв'ю не було — болі взяті з відгуків на сусідні продукти (проксі). Усі ролі гіпотетичні, поки не перевірені на людях (прогалина G1).</div>
 
-  <h3>Ролі-актори</h3>
+  <h3 id="personas-roles">Ролі-актори</h3>
   <div class="card" style="border-color:var(--acc)">
     <h4>🎯 PRIMARY: Координатор (двошаровий) <span class="b b-fakt">факт</span></h4>
     <p>Усі 10 JTBD-сценаріїв — з його позиції; він ставить застосунок, вводить дані, носить анамнез. <b>База:</b> веде власну картку (self). <b>Розширення:</b> 2–4 (до 5) профілі рідних — діти/літні батьки.</p>
@@ -425,7 +438,7 @@
   </div>
   <p class="ctx"><b>Self-режим</b> окремої персони не утворює — це базовий шар Координатора. На self не діють: координація двох доглядальників, ризик «внести не тому», соціальний бік «опікун». Бонус: self-профіль — природна точка входу, пом'якшує холодний старт.</p>
 
-  <h3>Що рухає · болить · поведінка · зрив</h3>
+  <h3 id="personas-behaviour">Що рухає · болить · поведінка · зрив</h3>
   <div class="grid2">
     <div class="card">
       <h4>Рухає</h4>
@@ -441,15 +454,15 @@
     </div>
   </div>
 
-  <div class="card" style="border-color:var(--red)">
+  <div class="card" style="border-color:var(--red)" id="personas-gaps">
     <h4>Чого про людей НЕ знаємо <span class="b b-q">?</span></h4>
     <p>G1 реальна поведінка (нема інтерв'ю) · G2 скільки членів веде один · G3 UA-специфіка недопредставлена · G4 демографія/вік/грамотність · G5 готовність платити · G6 динаміка двох доглядальників · G7 реальний поріг «занадто повільно» · G8 що показують лікарю в UA · G9 self — окрема аудиторія чи профіль у родині.</p>
   </div>
 </div></section>
 
 <!-- 5. PAINS -->
-<section id="pains"><div class="wrap">
-  <h2>5 · Болі користувачів</h2>
+<section id="pains" data-page="research"><div class="wrap">
+  <h2>3 · Болі користувачів</h2>
   <p class="sub">Джерело: <code>user-pains.md</code> — реальні відгуки як проксі замість інтерв'ю</p>
 
   <h3>Сила сигналу по продуктах</h3>
@@ -502,8 +515,8 @@
 </div></section>
 
 <!-- 6. COMPETITORS -->
-<section id="competitors"><div class="wrap">
-  <h2>6 · Конкуренти</h2>
+<section id="competitors" data-page="research"><div class="wrap">
+  <h2>4 · Конкуренти</h2>
   <p class="sub">Джерело: <code>competitors.md</code> — 3 групи (хард / софт / аспіраційні)</p>
 
   <h3>Порівняння за осями</h3>
@@ -553,8 +566,8 @@
 </div></section>
 
 <!-- 7. UX PATTERNS -->
-<section id="patterns"><div class="wrap">
-  <h2>7 · UX-патерни</h2>
+<section id="patterns" data-page="research"><div class="wrap">
+  <h2>5 · UX-патерни</h2>
   <p class="sub">Джерело: <code>ux-patterns.md</code> — «як саме» працює взаємодія + вердикт</p>
 
   <h3>Зведена матриця вердиктів</h3>
@@ -598,8 +611,8 @@
 </div></section>
 
 <!-- 8. BENCHMARK -->
-<section id="benchmark"><div class="wrap">
-  <h2>8 · Бенчмарк</h2>
+<section id="benchmark" data-page="research"><div class="wrap">
+  <h2>6 · Бенчмарк</h2>
   <p class="sub">Джерело: <code>benchmark.md</code> — найсильніші приклади з різних категорій. Шкала 1–5.</p>
 
   <h3>Вимір 1 — Швидкість і безболісність ручного введення <span class="ctx">(ризик №1)</span></h3>
@@ -655,8 +668,8 @@
 </div></section>
 
 <!-- 9. IA -->
-<section id="ia"><div class="wrap">
-  <h2>9 · Інформаційна архітектура</h2>
+<section id="ia" data-page="research"><div class="wrap">
+  <h2>7 · Інформаційна архітектура</h2>
   <p class="sub">Джерело: <code>patterns-information-architecture.md</code> — 5 осей організації</p>
 
   <div class="tw"><table>
@@ -681,8 +694,8 @@
 </div></section>
 
 <!-- 10. CONCLUSIONS -->
-<section id="conclusions"><div class="wrap">
-  <h2>10 · Висновки та відкриті питання</h2>
+<section id="conclusions" data-page="research"><div class="wrap">
+  <h2>8 · Висновки та відкриті питання</h2>
   <p class="sub">Джерело: <code>research.md</code> (синтез-хаб)</p>
 
   <h3>Гіпотези «якщо / то / бо»</h3>
@@ -731,7 +744,24 @@
 </main><!-- /.content -->
 
 <script>
-  // highlight the section currently in view in the sidebar
+  // ===== page tabs: Дослідження / JTBD / Персони (show one page at a time) =====
+  const pageTabs = [...document.querySelectorAll('.sb-page[data-page]')];
+  const pageSections = [...document.querySelectorAll('section[data-page]')];
+  const subBlocks = [...document.querySelectorAll('.sb-sub[data-sub]')];
+  function showPage(name){
+    pageSections.forEach(s => s.classList.toggle('is-hidden', s.dataset.page !== name));
+    pageTabs.forEach(t => {
+      const on = t.dataset.page === name;
+      t.classList.toggle('active', on);
+      if (on) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current');
+    });
+    subBlocks.forEach(b => { b.hidden = (b.dataset.sub !== name); });
+    window.scrollTo(0, 0);
+  }
+  pageTabs.forEach(t => t.addEventListener('click', e => { e.preventDefault(); showPage(t.dataset.page); }));
+  showPage('research'); // initial state: hide JTBD/Персони pages
+
+  // highlight the subsection currently in view in the sidebar
   const subLinks = [...document.querySelectorAll('.sb-sub a')];
   const map = Object.fromEntries(subLinks.map(a => [a.getAttribute('href').slice(1), a]));
   const io = new IntersectionObserver((entries) => {
@@ -743,7 +773,7 @@
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  document.querySelectorAll('section[id]').forEach(s => io.observe(s));
+  Object.keys(map).forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
 
   // mobile drawer open/close, with aria-expanded kept in sync
   const toggle = document.querySelector('.navtoggle');
